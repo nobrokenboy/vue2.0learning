@@ -4,14 +4,13 @@
 	<meta charset="UTF-8">
 	<title>vue demo6--prop验证</title>
 	<style type="text/css">
-
 	</style>
 </head>
 <body>
 	<div id="app">
 		<div id="counter-event-example">
 		  <p>{{ total }}</p>
-		  <button-counter :tips="message" v-on:increment1="incrementTotal" ></button-counter>
+		  <button-counter :tips="message" v-on:increment2="incrementTotal" ></button-counter>
 		<!--   <button-counter v-on:increment1="incrementTotal"></button-counter> -->
 		</div>
 	</div>	
@@ -21,7 +20,7 @@
  		Vue.component('button-counter', {
  		  props:["tips"],
 		  template:'<div>\
-		  <button v-on:click="increment1">{{ counter }}</button>\
+		  <button v-on:click="increment2">{{ counter }}</button>\
 		  <p>\
 		  {{tips}}\
 		  </p>\
@@ -32,14 +31,13 @@
 		    }
 		  },
 		  methods:{
-		    increment1: function () {
+		    increment2: function () {
 		      this.counter += 1
 		      debugger;
-		      this.$emit('increment1')
+		      this.$emit('increment2')
 		    }
 		  },
 		});
-
 		new Vue({
 		  el: '#counter-event-example',
 		  data: {
@@ -53,10 +51,6 @@
 		    }
 		  }
 		})
-
-
-
-
  	</script>
 </body>
 </html>

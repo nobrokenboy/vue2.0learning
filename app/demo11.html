@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo6--prop验证</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		{{Date}}
+		<hello :msg="message" v-on:getName="changeMsg"></hello>
+	</div>	
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 	/*不能使用menu作为组件的名称*/
+ 		Vue.component("hello",{
+ 			props:['msg'],
+ 			rops:['msg'],
+ 			template:'<div>\
+ 			<p>\
+ 			<button v-on:click="getName">{{name}}</button>\
+ 			</p>\
+ 			<p>{{msg}}</p>\
+ 			</div>',
+ 			data:function(){
+ 				return {
+ 					name:"hello"
+ 				}
+ 			},
+ 			mounted:function(){
+ 				alert("组件");
+ 			},
+ 			methods:{
+ 				getName:function(){
+ 					this.name="哈哈哈";
+ 					this.$emit('getName');
+ 				}
+ 			}
+
+ 		});
+ 		new Vue({
+ 			el:"#app",
+ 			data:{
+ 				message:"123",
+ 				Date:"2017-02-22"
+ 			},
+ 			mounted:function(){
+ 				alert("实例化");
+ 			},
+ 			methods:{
+ 				changeMsg:function(){
+ 					this.message="321";
+ 				}
+ 			}
+ 		});
+ 	</script>
+</body>
+</html>
