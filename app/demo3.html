@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo3</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<p v-for="(item,index) of nameLists">
+			{{item}}是第{{ index }}个
+		</p>
+		<button @click="addArr">点击我进行增加</button>
+		<button @click="lessArrLength">减少数组的长度</button>
+		<button @click="addArrLength" class="add">增加数组的长度,好奇怪为什么没有显示新的数据</button>
+		<ul>
+		  <template v-for="item in items">
+		    <li>{{ item.message }}</li>
+		  </template>
+		</ul>
+		<h1>关于超人的</h1>
+		<p v-for="(value,key,index) in superMan">
+			{{index}}-----{{key}}:{{value}}
+		</p>
+		<h2>关于整数的迭代</h2>
+		<p v-for="a in 20">
+			{{a}}
+		</p>
+		<h3>关于过滤数组的值1,利用计算属性</h3>
+		<p v-for="b in integer">
+			{{b}}
+		</p>
+		<h3>关于过滤数组的值2，利用methods</h3>
+		<p v-for="c in getEven(int)">
+			{{c}}
+		</p>
+	</div>	
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 		var vm=new Vue({
+ 			el:"#app",
+ 			data:{
+ 				nameLists:[
+ 					"Jack",
+ 					"Hohn",
+ 					"Nike"
+ 				],
+ 				items:[
+ 					 { message: 'Foo' },
+      				 { message: 'Bar' },
+      				 { message: 'koor'}
+ 				],
+ 				superMan:{
+ 					name:"zhiZhuXia",
+ 					height:"1.8meters",
+ 					sing:"good"
+ 				},
+ 				int:[100,102,103,104,105,106,111]
+ 			},
+ 			computed:{
+ 				integer:function(){
+ 					var _self=this;
+ 					//filter用于过滤数组
+ 					return _self.int.filter(function(item){
+ 						return item%2===0;
+ 					});
+ 				}
+ 			},
+ 			ready:function(){
+
+ 			},
+ 			methods:{
+ 				addArr:function(){
+ 					var _self=this;
+ 					//数组的过滤方法
+ 					_self.items=_self.items.filter(function(item){
+						return item.message.match(/Foo/);
+ 					});
+ 				},
+ 				lessArrLength:function(){
+ 					var _self=this;
+ 					/*_self.items.length=2;无法达到修改数组的长度*/
+ 					_self.items.splice(2);//可以达到修改数组的长度
+ 				},
+ 				addArrLength:function(){
+ 					var _self=this;
+ 					/*_self.items[1]="bbok";无法增加数组*/
+ 					/*_self.items.splice(1,0,"goo");*/
+ 				},
+ 				getEven:function(nums){
+ 					return nums.filter(function(num){
+ 						return num%2===0;
+ 					});
+ 				}
+ 			},
+ 			filters:{
+ 				
+ 			}
+ 		});
+
+ 		document.querySelector(".add").addEventListener("click",function(){
+ 			Vue.set(vm.$data.items,1,"bbok");//响应原理的应用
+ 		});
+
+
+ 	</script>
+</body>
+</html>

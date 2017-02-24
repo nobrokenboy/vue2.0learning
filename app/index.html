@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>geest</title>
+</head>
+<body>
+	<section id="indexController">
+		<!-- <div v-for="i in lists">{{i}}</div> -->
+<!-- 		<div>
+	<menu></menu>
+</div> -->
+		<div>
+			<new-menu></new-menu>
+		</div>
+	</section>
+<!-- 	<script src="../public/js/vue/vue.js"></script>
+<script>
+	Vue.component('menu',{
+		template:'<p>hello</p>'
+	});
+	var vm=new Vue({
+		el:"#indexController",
+		data:{
+			lists:["A","B","C"]
+		},
+		ready:function(){
+			console.log("this is a demo!");
+		},
+		methods:{
+
+		}
+
+	});
+</script> -->
+	<script>
+		//创建属性
+		var newMenuProto=Object.create(HTMLElement.prototype);
+		newMenuProto.hello=function(){
+			alert("hello!");
+		}
+		newMenuProto.createdCallback=function(){
+			this.style.width="100px";
+			this.style.height="100px";
+			this.style.background="red";
+		};
+		Object.defineProperty(newMenuProto,"name",{
+			value:20,
+			writable:true
+		});
+		//注册属性
+		var registerNewMenuElement=document.registerElement("new-menu",{
+			prototype:newMenuProto
+		});
+		var newMunu=new registerNewMenuElement();
+		document.body.appendChild(newMunu);
+		//调用
+		newMunu.hello();
+		var name=newMunu.name;
+	</script>
+</body>
+</html>
+
+
+

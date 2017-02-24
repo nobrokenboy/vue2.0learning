@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo</title>
+</head>
+<body>
+	<div id="app">
+		<todo-menu v-for="i in arrData" v-bind:todo="name"></todo-menu>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+		Vue.component("todo-menu",{
+			props:['todo'],
+			template:"<p>{{todo}}</p>"
+
+		});
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				name:"bg",
+				arrData:[
+					"我哈哈",
+					"牛逼比",
+					"热烘烘",
+				]
+			}
+		});
+	</script>
+</body>
+</html>

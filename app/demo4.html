@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo3</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<button @click="count+=1">{{count}}</button>
+		<button @click="alarm" data-attr="1">哈哈</button>
+		<a @click="show('Dami',$event)" href="http://www.baidu.com">哈哈</a>
+		<a href="http://www.baidu.com" @click.prevent="getName($event)">咚咚咚</a>
+		<input type="text" @keyup.esc="submit($event)"/>
+	</div>	
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 		var vm=new Vue({
+ 			el:"#app",
+ 			data:{
+ 				count:0,
+ 				name:"jack"
+ 			},
+ 			computed:{
+ 				
+ 			},
+ 			ready:function(){
+
+ 			},
+ 			methods:{
+ 				alarm:function(event){
+ 					/*alert(this.name);*/
+ 					console.log($(event.target));
+ 					console.log(event.currentTarget);
+ 					$(event.currentTarget).on("click",function(){
+ 						var attr=$(this).attr("data-attr");
+ 						console.log(attr);
+ 					});
+ 					console.log(event);
+
+ 				},
+ 				show:function(msg,event){
+ 					if(event){
+ 						event.preventDefault();
+ 						console.log(event.currentTarget);
+ 					}
+ 					alert(msg);
+ 				},
+ 				getName:function(event){
+ 					var $this=$(event.currentTarget);
+ 					var text=$this.text();
+ 					alert(text);
+ 				},
+ 				submit:function(event){
+ 					alert($(event.currentTarget).val());
+ 				}
+ 			},
+ 			filters:{
+ 				
+ 			}
+ 		});
+
+ 		//
+ 		/*vm.alarm();*/
+
+
+
+ 	</script>
+</body>
+</html>

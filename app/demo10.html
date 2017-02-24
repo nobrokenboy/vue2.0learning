@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo6--prop验证-----这样子会改变父组件的</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<comp v-on:sendData="getNewMsg" :msg="message"></comp> 
+	</div>	
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 		Vue.component("comp",{
+ 			props:['msg'],
+ 			template:'<div>\
+ 			<p>\
+ 			<button v-on:click="sendData">{{name}}</button>\
+ 			</p>\
+ 			<p>{{tips}}</p>\
+ 			</div>',
+ 			data:function(){
+ 				return {
+ 					name:"哈哈哈"
+ 				}
+ 			},
+ 			computed:{
+ 				tips:function(){
+ 					if(this.msg.indexOf("!")>-1){
+ 						return this.msg+"no"
+ 					}else{
+ 						return this.msg+"yes"
+ 					}
+ 				}
+ 			},
+ 			mounted:function(){
+ 				console.log("hello");
+ 				console.log(this);
+ 			},
+ 			methods:{
+ 				sendData:function(event){
+ 					alert(event.currentTarget.innerText)
+ 					this.$emit('sendData')
+ 				}
+ 			}
+ 		});
+
+ 		/*实例化*/
+ 		var vm=new Vue({
+ 			el:"#app",
+ 			data:{
+ 				message:"!有错误"
+
+ 			},
+ 			computed:{
+ 				
+ 			},
+ 			mounted:function(){
+ 				var _self=this;
+ 				console.log("hello world");
+ 			},
+ 			methods:{
+ 				getNewMsg:function(){
+ 					debugger;
+ 					this.message="OK ";
+ 				}
+ 			},
+ 			filters:{
+ 				
+ 			}
+ 		});
+
+
+
+
+ 	</script>
+</body>
+</html>

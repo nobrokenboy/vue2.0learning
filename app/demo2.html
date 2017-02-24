@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo2</title>
+	<style type="text/css">
+		.common{
+			display:inline-block;
+			width:100px;
+			height:40px;
+			line-height:40px;
+			text-align:center;
+			background:grey;
+			color:#000;
+		}
+		.isActiveClass{
+			background-color:orange;
+			color:#fff;
+		}
+		.hasBorderRadius{
+			border-radius:5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<button @click="changeStatus">加1</button>	
+		<h2>{{whatName.split("").reverse().join("")|capitalize}}</h2>	
+		<p>{{new Date()}}</p>
+		<p>{{Math.abs(-100)}}</p>
+		<p>{{Math.floor(-0.167)}}</p>
+		<!-- .prevent等效于event.preventDefault -->
+		<button @click.prevent="add">哈哈</button>
+		<p>{{reverseData}}</p>
+		<p>{{reverseData1()}}</p>
+		<a class="common" @click="clickActive" v-bind:class="{isActiveClass:isActive,hasBorderRadius:hasRadius}" >激活按钮</a>
+		<div v-bind:style="boxStyle"></div>	
+		<template v-if="ok==1">
+		  <h1>Title</h1>
+		  <p>Paragraph 1</p>
+		  <p>Paragraph 2</p>
+		</template>
+		<template v-else-if="ok==3">
+		  <h1>Title no</h1>
+		  <p>Paragraph 3</p>
+		  <p>Paragraph 4</p>
+		</template>
+		<template v-else>
+		  <h1>Title yes</h1>
+		  <p>Paragraph 5</p>
+		  <p>Paragraph 6</p>
+		</template>
+	</div>	
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 		var vm=new Vue({
+ 			el:"#app",
+ 			data:{
+ 				a:3,
+ 				whatName:"hello",
+ 				name:"ok",
+ 				isActive:false,
+ 				hasRadius:false,
+ 				boxStyle:{
+ 					width:"100px",
+ 					height:"100px",
+ 					marginTop:"20px",
+ 					backgroundColor:"orange"
+ 				},
+ 				ok:1
+ 			},
+ 			computed:{
+ 				reverseData:function(){
+ 					return this.name.split("").reverse().join("");
+ 				}
+ 			},
+ 			ready:function(){
+
+ 			},
+ 			methods:{
+ 				changeStatus:function(){
+ 					this.a+=this.a;
+ 					return this.a;
+ 				},
+ 				add:function(){
+ 					console.log("world");
+ 				},
+ 				reverseData1:function(){
+ 					return this.name.split("").reverse().join("");
+ 				},
+ 				clickActive:function(){
+ 					var _self=this;
+ 					_self.isActive=true;
+ 					_self.hasRadius=true;
+ 					_self.ok=2;
+ 				}
+ 			},
+ 			filters:{
+ 				capitalize:function(value){
+ 					if(!value)return;
+ 					value=value.toString();
+ 					return value.charAt(0).toUpperCase()+value.slice(1);
+ 				}
+ 			}
+ 		});
+ 		console.log(vm.a);
+ 		console.log(vm.$data.a);
+ 		//检测数据的变化
+ 		vm.$watch('a',function(newValue,oldValue){
+ 			console.log(newValue);
+ 			console.log(oldValue);
+ 			console.log("a发生变化");
+ 		});
+
+ 	</script>
+</body>
+</html>

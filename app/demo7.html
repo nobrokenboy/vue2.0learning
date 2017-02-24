@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo6--prop验证</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<comp :msg="message"></comp> 
+	</div>	
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 		Vue.component("comp",{
+ 			props:{//是用来转递数据
+ 				msg:String,
+ 				propA:{
+ 					type:Boolean,
+ 					default:function(){
+ 						return false;
+ 					}
+ 				},
+ 				number:{
+ 					type:Number,
+ 					required:true
+ 				}
+ 			},
+ 			template:'<div>\
+ 			<p>\
+ 			<button :disbaled="!propA" @click="sendData">{{name}}</button>\
+ 			</p>\
+ 			<p>{{msg}}</p>\
+ 			</div>',
+ 			data:function(){
+ 				return {
+ 					name:"哈哈哈"
+ 				}
+ 			},
+ 			mounted:function(){
+ 				console.log("hello");
+ 				console.log(this);
+ 			},
+ 			methods:{
+ 				sendData:function(event){
+ 					var _self=this;
+ 					alert(event.currentTarget.innerText);
+ 					_self.propA=true;
+ 				}
+ 			}
+ 		});
+
+ 		/*实例化*/
+ 		var vm=new Vue({
+ 			el:"#app",
+ 			data:{
+ 				message:"该信息不能及时返回"
+
+ 			},
+ 			computed:{
+ 				
+ 			},
+ 			mounted:function(){
+ 				var _self=this;
+ 				console.log("hello world");
+ 			},
+ 			methods:{
+ 				
+ 			},
+ 			filters:{
+ 				
+ 			}
+ 		});
+
+
+
+
+ 	</script>
+</body>
+</html>

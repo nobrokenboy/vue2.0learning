@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo6--prop验证</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div id="counter-event-example">
+		  <p>{{ total }}</p>
+		  <button-counter :tips="message" v-on:increment1="incrementTotal" ></button-counter>
+		<!--   <button-counter v-on:increment1="incrementTotal"></button-counter> -->
+		</div>
+	</div>	
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 		Vue.component('button-counter', {
+ 		  props:["tips"],
+		  template:'<div>\
+		  <button v-on:click="increment1">{{ counter }}</button>\
+		  <p>\
+		  {{tips}}\
+		  </p>\
+		  </div>',
+		  data:function () {
+		    return {
+		      counter: 0
+		    }
+		  },
+		  methods:{
+		    increment1: function () {
+		      this.counter += 1
+		      debugger;
+		      this.$emit('increment1')
+		    }
+		  },
+		});
+
+		new Vue({
+		  el: '#counter-event-example',
+		  data: {
+		    total: 0,
+		    message:"greet"
+		  },
+		  methods: {
+		    incrementTotal: function () {
+		    	debugger;
+		      this.total += 1
+		    }
+		  }
+		})
+
+
+
+
+ 	</script>
+</body>
+</html>

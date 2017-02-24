@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue demo3</title>
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<div id="app">
+		<h1>下面的例子prop是实际数字</h1>
+		<comp v-bind:some-prop="2"></comp>  
+		<h1>下面的例子prop是字符串</h1>
+		<comp some-prop="2"></comp>
+	</div>	
+	<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+ 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+ 	<script>
+ 		Vue.component("comp",{
+ 			"props":['someProp'],
+ 			"template":"<p>{{someProp}}</p>"
+ 		});
+ 		var vm=new Vue({
+ 			el:"#app",
+ 			data:{
+
+ 			},
+ 			computed:{
+ 				
+ 			},
+ 			ready:function(){
+
+ 			},
+ 			methods:{
+ 				
+ 			},
+ 			filters:{
+ 				
+ 			}
+ 		});
+
+
+
+
+ 	</script>
+</body>
+</html>
