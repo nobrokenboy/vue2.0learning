@@ -10,52 +10,44 @@
 <body>
 	<div id="app">
 		<p>{{other}}</p>
-		<comp :msg="message" v-on:sendData="getNewMsg" ></comp> 
+		<button-counter :msg="message" v-on:sendData="getNewMsg" ></button-counter>
 	</div>	
  	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
  	<script>
- 		Vue.component("comp",{
+ 		Vue.component("button-counter",{
  			props:['msg'],
  			template:'<div>\
  			<p>\
- 			<button v-on:click="sendData">{{name}}</button>\
+ 			<button v-on:click="sendData">{{count}}</button>\
  			</p>\
  			<p>{{tips}}</p>\
  			</div>',
  			data:function(){
  				return {
- 					name:"哈哈哈"
+ 					count:1
  				}
  			},
  			computed:{
  				tips:function(){
- 					if(this.msg.indexOf("!")>-1){
- 						return this.msg+"no"
- 					}else{
- 						return this.msg+"yes"
- 					}
+ 					return this.count*10;
  				}
  			},
  			methods:{
  				sendData:function(event){
- 					debugger;
  					alert(event.currentTarget.innerText)
- 					this.name=this.name+"呵呵呵";
+ 					this.count+=1;
  					this.$emit('sendData')
  				}
  			}
  		});
 
  		/*实例化*/
- 		var vm=new Vue({
+ 		new Vue({
  			el:"#app",
  			data:{
- 				message:"有错误!",
- 				other:"about"
+ 				message:"哈哈!",
+ 				other:0
 
- 			},
- 			computed:{
- 				
  			},
  			mounted:function(){
  				var _self=this;
@@ -64,7 +56,8 @@
  			methods:{
  				getNewMsg:function(){
  					debugger;
- 					this.message="OK ";
+ 					console.log("被触发");
+ 					this.other += 1
  				}
  			}
  		});
