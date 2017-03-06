@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>vue demo6--prop验证-----这样子会改变父组件的</title>
+	<title>vue demo10 .native修饰v-on实现给组件绑定原生事件</title>
 	<style type="text/css">
 
 	</style>
 </head>
 <body>
 	<div id="app">
-		<comp v-on:sendData="getNewMsg" :msg="message"></comp> 
+		<comp v-on:click.native="getNewMsg" :msg="message"></comp> 
 	</div>	
  	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
  	<script>
@@ -17,7 +17,7 @@
  			props:['msg'],
  			template:'<div>\
  			<p>\
- 			<button v-on:click="sendData">{{name}}</button>\
+ 			<button>{{name}}</button>\
  			</p>\
  			<p>{{tips}}</p>\
  			</div>',

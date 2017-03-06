@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作用域插槽---可以传递数据</title>
+</head>
+<body >
+	<div id="app">
+		<div class="parent">
+		  <child>
+		    <template scope="props">
+		      <h2>hello from parent</h2>
+		      <h2>{{ props.text }}</h2>
+		    </template>
+		  </child>
+		</div>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+		Vue.component("child",{
+			template:'<div class="child">\
+			  <slot text="hello from child"></slot>\
+			</div>'
+		});
+		new Vue({
+			el:"#app"
+		});
+	</script>
+</body>
+</html>

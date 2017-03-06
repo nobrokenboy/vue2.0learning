@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件过渡效果的实现</title>
+	<link href="http://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+	<style>
+		.fade1-enter-active, .fade1-leave-active {
+		  transition: opacity .5s
+		}
+		.fade1-enter, .fade1-leave-active {
+		  opacity: 0
+		}
+		/* .bounce-enter-active{
+			-webkit-animation:bounceIn .5s;
+			animation:bounceIn .5s;
+		}
+		.bounce-leave-active{
+			-webkit-animation:bounceOut .5s;
+			animation:bounceOut .5s;
+		} */
+	</style>
+</head>
+<body>
+	<div id="demo">
+	  <button v-on:click="show = !show">
+	    Toggle
+	  </button>
+	  <transition name="fade1">
+	    <p v-if="show">hello</p>
+	  </transition>
+	  <button v-on:click="isReal=!isReal">是不是真的</button>
+	  <transition name="bounce" enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+	  	<p v-if="isReal">helllo</p>
+	  </transition>
+	</div>
+	 <script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	 <script>
+	 	var vm=new Vue({
+	 		el:"#demo",
+	 		data:{
+	 			show:true,
+	 			isReal:true
+	 		},
+	 		mounted:function(){
+
+	 		}
+
+	 	});
+	 </script>
+</body>
+</html>

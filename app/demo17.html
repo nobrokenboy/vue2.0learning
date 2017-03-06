@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>深入响应式原理</title>
+</head>
+<body>
+	<div id="app">
+		<div v-for="(value,key,index) in msg">
+			<!-- <p>{{item}}</p> -->
+			<p>{{index}}---{{key}}:{{value}}</p>
+		</div>
+		<h1>
+			{{name}}
+		<!-- 	{{fname}} -->
+		</h1>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				msg:{
+					name:"Jack",
+					prop:"link"
+				},
+				name:""
+			},
+			mounted:function(){
+				console.log("hdhdhd");
+				/*this.msg=Object.assign({},this.msg,{href:"https://www.baidu.com"});*/
+				/*this.$set(this.msg,"href","https://www.baidu.com");*/
+			}
+		});
+		/*Vue.set(vm.msg,'href',"https://www.baidu.com");*/
+		/*vm.$set(vm.msg,"href","https://www.baidu.com");*/
+		vm.name="animals";//这也是响应式的
+		//vm.fname="jim";//这个是非响应式，会报错
+	</script>
+</body>
+</html>

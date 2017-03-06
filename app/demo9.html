@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>vue demo6--prop验证-----这样子会改变父组件的</title>
+	<title>vue demo9--自定义事件</title>
 	<style type="text/css">
 
 	</style>
@@ -10,7 +10,7 @@
 <body>
 	<div id="app">
 		<p>{{other}}</p>
-		<button-counter :msg="message" v-on:sendData="getNewMsg" ></button-counter>
+		<button-counter :msg="message" v-on:send="getNewMsg" ></button-counter>
 	</div>	
  	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
  	<script>
@@ -18,7 +18,7 @@
  			props:['msg'],
  			template:'<div>\
  			<p>\
- 			<button v-on:click="sendData">{{count}}</button>\
+ 			<button v-on:click="send">{{count}}</button>\
  			</p>\
  			<p>{{tips}}</p>\
  			</div>',
@@ -33,10 +33,10 @@
  				}
  			},
  			methods:{
- 				sendData:function(event){
+ 				send:function(){
  					alert(event.currentTarget.innerText)
  					this.count+=1;
- 					this.$emit('sendData')
+ 					this.$emit('send')
  				}
  			}
  		});

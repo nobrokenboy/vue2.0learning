@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态组件</title>
+</head>
+<body>
+	<div id="app">
+		<!--keep-live避免组件被销毁-->
+		 <keep-live>
+		 	 <!--使用保留的component元素-->
+			<component v-bind:is="currentView">
+			  <!-- 组件在 vm.currentview 变化时改变！ -->
+			</component>
+		 </keep-live>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+		var home={
+			template:"<p>hello this is a simple problem!</p>"
+		};
+		var second={
+			template:"<div>\
+			<button v-on:click='add'>{{counter}}\
+			</button>\
+			<p>hello this is not a simple problem!\
+			</p>\
+			</div>",
+			data:function(){
+				return {
+					counter:0
+				}
+			},
+			methods:{
+				add:function(){
+					this.counter+=1;
+				}
+			}
+		};
+		var third={
+			template:"<p>hello this is really a simple problem!</p>"
+		};
+		new Vue({
+			el:"#app",
+			data:{
+				currentView:second
+			},
+			components:{
+				home:home,
+				second:second,
+				third:third
+			}
+		});
+	</script>
+</body>
+</html>
