@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue2.0 指令</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-focus>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+		Vue.directive('focus',{
+			bind:function(){//只调用一次
+
+			},
+			inserted:function(el){//被绑定元素插入父节点时用
+				el.focus();
+			}，
+			update:function(){//被绑定元素所在的模板更新时调用，而不论绑定值是否变化
+
+			},
+			componentUpdated:function(){
+
+			},
+			unbind:function(){//只调用一次
+
+			}
+		});
+		new Vue({
+			el:"#app"
+		});
+	</script>
+</body>
+</html>

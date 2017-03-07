@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue2.0render函数高级应用to understand</title>
+</head>
+<body>
+	<div id="app">
+		<anchored-heading :level="1">
+			<p>哈哈哈</p>
+		</anchored-heading>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+			var getChildrenTextContent = function (children) {
+			   return children.map(function (node) {
+			    return node.children
+			      ? getChildrenTextContent(node.children)
+			      : node.text
+			  }).join('')
+			}
+			Vue.component('anchored-heading', {
+			  render: function (createElement) {
+			    // create kebabCase id
+			    var headingId = getChildrenTextContent(this.$slots.default)
+			      .toLowerCase()
+			      .replace(/\W+/g, '-')
+			      .replace(/(^\-|\-$)/g, '')
+			    return createElement(
+			      'h' + this.level,
+			      [
+			        createElement('a', {
+			          attrs: {
+			            name: headingId,
+			            href: '#' + headingId
+			          }
+			        }, this.$slots.default)
+			      ]
+			    )
+			  },
+			  props: {
+			    level: {
+			      type: Number,
+			      required: true
+			    }
+			  }
+			})
+
+			new Vue({
+				el:"#app"
+			});
+	</script>
+</body>
+</html>

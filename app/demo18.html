@@ -30,7 +30,7 @@
 	    <p v-if="show">hello</p>
 	  </transition>
 	  <button v-on:click="isReal=!isReal">是不是真的</button>
-	  <transition name="bounce" enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+	  <transition name="bounce" enter-active-class="animated bounceIn" leave-active-class="animated bounceOut" v-on:before-enter="beforeEnter" v-on:enter="enter">
 	  	<p v-if="isReal">helllo</p>
 	  </transition>
 	</div>
@@ -44,6 +44,16 @@
 	 		},
 	 		mounted:function(){
 
+	 		},
+	 		methods:{
+	 			beforeEnter:function(){
+	 				alert("hello");
+	 			},
+	 			enter:function(el,done){
+	 				debugger;
+	 				alert(el);
+	 				done();
+	 			}
 	 		}
 
 	 	});

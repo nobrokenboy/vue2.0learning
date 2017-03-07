@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue2.0 render函数</title>
+</head>
+<body>
+	<div id="app">
+		<archor-target :level="1">
+			<p>哈哈哈</p>
+			<p slot="header">嘻嘻嘻</p>
+			<p slot="main">呵呵呵</p>
+			<p slot="footer">哇哇哇</p>
+		</archor-target>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+		Vue.component("archor-target",{
+			render:function(createElement){
+				return createElement(
+						'h'+this.level,
+					 	 this.$slots.main
+					);
+			},
+			props:{
+				level:{
+					type:Number,
+					required:true
+				}
+			}
+		});
+		new Vue({
+			el:"#app"
+		});
+	</script>
+</body>
+</html>

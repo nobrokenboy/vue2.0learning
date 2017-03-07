@@ -9,7 +9,86 @@
 	</style>
 </head>
 <body>
+	
+	<div id="example-4">
+	  <input type="text" v-model="name" @input="getName()">
+	  <button @click="show = !show" >
+	    Toggle
+	  </button>
+	  <transition
+	    v-on:before-enter="beforeEnter"
+	    v-on:enter="enter"
+	    v-on:leave="leave"
+	    v-bind:css="false"
+	  >
+	    <p v-if="show">
+	      Demo
+	    </p>
+	    <p v-else>
+	    	Sorry!
+	    </p>
+	  </transition>
+	  <button @click="addMore">加加加</button>
+	  	<transition>
+		  <table v-if="items.length>0">
+		    <!-- ... -->
+		  </table>
+		  <p v-else>Sorry, no items found.</p>
+		</transition>
+		<button @click="btnStatus=!btnStatus">改变按钮的状态</button>
+		<transition>
+			<button v-if="btnStatus" key="save">Save</button>
+			<button key="edit">Edit</button>
+		</transition>
+		<!--下面的效果与上面等效-->
+		<!-- <transition name="fade" mode="out-in">
+			<button v-bind:key="btnStatus">
+				{{btnStatus?'Save':'Edit'}}
+			</button>
+		</transition> -->
+	</div>
 	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
 	<script src="http://cdn.bootcss.com/velocity/1.4.3/velocity.js"></script>
+	<script>
+		var vm=new Vue({
+			el:"#example-4",
+			data:{
+				show:false,
+				name:"",
+				items:[],
+				btnStatus:false
+			},
+			mounted:function(){
+
+			},
+			methods:{
+				getName:function(){
+					console.log(this.name);
+				},
+				beforeEnter:function(el){
+					el.style.opacity=0;
+					el.style.transformOrigin="left";
+				},
+				enter:function(el,done){
+					Velocity(el, { opacity: 1, fontSize: '1.4em' }, { duration: 300 })
+      				Velocity(el, { fontSize: '1em' }, { complete: done })
+				},
+				leave:function(el,done){
+					  Velocity(el, { translateX: '15px', rotateZ: '50deg' }, { duration: 600 })
+				      Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
+				      Velocity(el, {
+				        rotateZ: '45deg',
+				        translateY: '30px',
+				        translateX: '30px',
+				        opacity: 0
+				      }, { complete: done })
+				},
+				addMore:function(){
+					this.items.push("123");
+				}
+
+			}
+		});
+	</script>
 </body>
 </html>

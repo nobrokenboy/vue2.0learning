@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue2.0 指令</title>
+</head>
+<body>
+	<div id="app">
+		<!--参数say有什么功能呢？？？？？-->
+		<div class="menu" v-demo:say.a.b="message"></div>
+	</div>
+	<script src="http://cdn.bootcss.com/vue/2.1.10/vue.min.js"></script>
+	<script>
+		Vue.directive('demo',{
+			bind:function(el,binding,vnode){//只调用一次
+				var s = JSON.stringify;
+			    el.innerHTML =
+			      'name: '       + s(binding.name) + '<br>' +
+			      'value: '      + s(binding.value) + '<br>' +
+			      'expression: ' + s(binding.expression) + '<br>' +
+			      'argument: '   + s(binding.arg) + '<br>' +
+			      'modifiers: '  + s(binding.modifiers) + '<br>' +
+			      'vnode keys: ' + Object.keys(vnode).join(', ')
+			},
+			inserted:function(el){//被绑定元素插入父节点时用
+				
+			},
+			update:function(){//被绑定元素所在的模板更新时调用，而不论绑定值是否变化
+
+			},
+			componentUpdated:function(){
+
+			},
+			unbind:function(){//只调用一次
+
+			}
+		});
+		new Vue({
+			el:"#app",
+			data:{
+				message:"hello!!!!"
+			}
+		});
+	</script>
+</body>
+</html>
